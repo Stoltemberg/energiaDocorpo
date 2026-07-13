@@ -56,15 +56,28 @@ test("inclui os ativos essenciais", async () => {
 });
 
 test("exibe as fotografias completas e centraliza o logo no mobile", async () => {
-  const css = await read("app/globals.css");
+  const [page, css] = await Promise.all([
+    read("app/page.tsx"),
+    read("app/globals.css"),
+  ]);
 
   assert.match(
-    css,
-    /\.hero-photo\s*\{[\s\S]*?inset:\s*0 0 110px 0[\s\S]*?url\("\/hero-producao\.png"\) right center \/ contain no-repeat/i,
+    page,
+    /<Image[\s\S]*?className="hero-image"[\s\S]*?src="\/hero-producao\.png"[\s\S]*?fill[\s\S]*?priority/,
   );
   assert.match(
-    css,
-    /\.split-photo\s*\{[\s\S]*?url\("\/hero-producao\.png"\) right center \/ contain no-repeat[\s\S]*?background-color:\s*var\(--ink-950\)/i,
+    page,
+    /<Image[\s\S]*?className="split-image"[\s\S]*?src="\/hero-producao\.png"[\s\S]*?fill/,
+  );
+  assert.match(css, /\.hero-image\s*\{[\s\S]*?object-fit:\s*contain/i);
+  assert.match(css, /\.split-image\s*\{[\s\S]*?object-fit:\s*contain/i);
+  assert.doesNotMatch(
+    css.match(/\.hero-photo\s*\{[\s\S]*?\}/)?.[0] ?? "",
+    /url\("\/hero-producao\.png"\)/i,
+  );
+  assert.doesNotMatch(
+    css.match(/\.split-photo\s*\{[\s\S]*?\}/)?.[0] ?? "",
+    /url\("\/hero-producao\.png"\)/i,
   );
   assert.match(
     css,
@@ -72,7 +85,7 @@ test("exibe as fotografias completas e centraliza o logo no mobile", async () =>
   );
   assert.match(
     css,
-    /@media \(max-width: 640px\)[\s\S]*?\.hero-photo\s*\{[\s\S]*?url\("\/hero-producao\.png"\) right center \/ contain no-repeat/i,
+    /@media \(max-width: 640px\)[\s\S]*?\.hero-shade\s*\{\s*display:\s*none;\s*\}/i,
   );
   assert.match(
     css,

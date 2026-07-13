@@ -8,10 +8,12 @@ Corrigir o enquadramento das fotografias na versão desktop, centralizar o logot
 
 ### Fotografias no desktop
 
-- Exibir integralmente as fotografias com `background-size: contain` no desktop e mobile.
-- Expandir a camada fotográfica do hero por toda a largura disponível, mantendo a fotografia alinhada à direita.
+- Renderizar as fotografias como componentes `Image` reais, sem utilizá-las como fundos CSS.
+- Exibir integralmente as imagens com `object-fit: contain` no desktop e mobile.
+- Expandir a camada fotográfica do hero por toda a largura disponível, mantendo a imagem alinhada à direita.
 - Preservar o atleta completo, sem cortes no rosto, tronco, braços ou pernas.
 - Usar fundo preto nas áreas livres, aproveitando o fundo escuro da própria fotografia para uma transição discreta.
+- Remover o sombreado sobre a fotografia no mobile; no desktop, manter somente um gradiente horizontal atrás do texto.
 - Manter as alturas atuais das seções e aceitar espaço escuro quando a proporção do contêiner for diferente da proporção da fotografia.
 
 ### Logotipo no mobile
@@ -40,7 +42,7 @@ Corrigir o enquadramento das fotografias na versão desktop, centralizar o logot
 - Concentrar as alterações em `app/globals.css` e `app/page.tsx`.
 - Reutilizar `public/logo-energia-do-corpo.png`; não criar um novo ativo visual.
 - Representar as ruas com pseudo-elementos e gradientes sem repetição, evitando bibliotecas de mapas.
-- Adicionar testes de fonte para confirmar os novos seletores, o uso do logotipo no marcador e a ausência do antigo `E`.
+- Adicionar testes de fonte para confirmar os componentes de imagem, `object-fit: contain`, o uso do logotipo no marcador e a ausência do antigo `E`.
 
 ## Validação
 

@@ -103,7 +103,16 @@ export default function Home() {
       </header>
 
       <section className="hero" id="inicio">
-        <div className="hero-photo" role="img" aria-label="Pessoa treinando com cabos em uma academia, imagem ilustrativa.">
+        <div className="hero-photo">
+          <Image
+            className="hero-image"
+            src="/hero-producao.png"
+            alt="Pessoa treinando com cabos em uma academia"
+            fill
+            sizes="100vw"
+            priority
+            unoptimized
+          />
           <span className="photo-note">Imagem ilustrativa</span>
         </div>
         <div className="hero-shade" />
@@ -179,7 +188,16 @@ export default function Home() {
       </section>
 
       <section className="split-band">
-        <div className="split-photo" role="img" aria-label="Detalhe de treino em academia, imagem ilustrativa." />
+        <div className="split-photo">
+          <Image
+            className="split-image"
+            src="/hero-producao.png"
+            alt="Pessoa treinando em uma academia"
+            fill
+            sizes="(max-width: 960px) 100vw, 50vw"
+            unoptimized
+          />
+        </div>
         <div className="split-copy">
           <p className="eyebrow"><span /> Para todos os níveis</p>
           <h2>Seu começo não precisa ser perfeito.</h2>

@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- Usar `background-size: contain` nas fotografias desktop e mobile para impedir cortes.
+- Renderizar as fotografias com `next/image` e `object-fit: contain` no desktop e mobile para impedir cortes e sobreposição de gradientes.
 - Não alterar a altura atual das seções para mostrar a imagem inteira.
 - Centralizar o logotipo somente em telas de até 640 px.
 - Reutilizar `public/logo-energia-do-corpo.png`; não criar novos ativos.
