@@ -54,3 +54,40 @@ test("inclui os ativos essenciais", async () => {
     access(new URL("../public/fonts/geist-latin.woff2", import.meta.url)),
   ]);
 });
+
+test("preserva o atleta no desktop e centraliza o logo no mobile", async () => {
+  const css = await read("app/globals.css");
+
+  assert.match(
+    css,
+    /url\("\/hero-producao\.png"\) right center \/ cover no-repeat/i,
+  );
+  assert.match(
+    css,
+    /\.split-photo\s*\{[\s\S]*?url\("\/hero-producao\.png"\) right center \/ cover no-repeat/i,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 640px\)[\s\S]*?\.site-header \.wordmark\s*\{[\s\S]*?position:\s*absolute[\s\S]*?left:\s*50%[\s\S]*?translateX\(-50%\)/i,
+  );
+});
+
+test("renderiza um minimapa sem mosaico e com o logo no marcador", async () => {
+  const [page, css] = await Promise.all([
+    read("app/page.tsx"),
+    read("app/globals.css"),
+  ]);
+
+  assert.match(page, /<div className="map-grid" aria-hidden="true">\s*<span \/>\s*<\/div>/);
+  assert.match(
+    page,
+    /className="map-pin"[\s\S]*?<Image[\s\S]*?src="\/logo-energia-do-corpo\.png"[\s\S]*?alt=""/,
+  );
+  assert.doesNotMatch(page, /className="map-pin"[\s\S]*?<span>E<\/span>/);
+  assert.match(css, /\.map-grid::before,[\s\S]*?\.map-grid::after,[\s\S]*?\.map-grid span/);
+  assert.doesNotMatch(
+    css.match(/\.map-grid\s*\{[\s\S]*?\}/)?.[0] ?? "",
+    /background-size/i,
+  );
+  assert.match(css, /\.map-pin img\s*\{[\s\S]*?object-fit:\s*contain/i);
+});

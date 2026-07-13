@@ -217,8 +217,18 @@ export default function Home() {
 
       <section className="location-section" id="localizacao">
         <div className="map-panel">
-          <div className="map-grid" aria-hidden="true" />
-          <div className="map-pin" aria-hidden="true"><span>E</span></div>
+          <div className="map-grid" aria-hidden="true">
+            <span />
+          </div>
+          <div className="map-pin" aria-hidden="true">
+            <Image
+              src="/logo-energia-do-corpo.png"
+              alt=""
+              width={900}
+              height={900}
+              unoptimized
+            />
+          </div>
           <p>Olaria · Canoas</p>
         </div>
         <div className="location-copy">
