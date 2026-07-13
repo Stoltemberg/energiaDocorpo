@@ -24,13 +24,16 @@ Substituir `public/hero-producao.png`, que está estruturalmente corrompido, por
 
 ## Integração
 
-- Substituir somente o conteúdo binário de `public/hero-producao.png`, mantendo o caminho atual para não alterar componentes ou referências existentes.
-- Exportar como PNG válido em RGB, sem corrupção ou dados truncados.
+- Converter a fotografia íntegra para WebP de alta qualidade e salvá-la como `public/hero-producao-v2.webp`.
+- Atualizar todas as referências da fotografia para o novo caminho, forçando a invalidação do cache do arquivo corrompido.
+- Manter o arquivo abaixo de 700 KB para evitar truncamento durante o transporte em Base64.
 - Preservar o comportamento atual de `next/image` com `object-fit: contain`.
+- Remover `public/hero-producao.png` somente depois que nenhuma referência ao caminho antigo permanecer.
 
 ## Validação
 
-- Confirmar que o arquivo é decodificado integralmente por uma ferramenta independente.
-- Confirmar dimensões, formato RGB e integridade do PNG.
+- Confirmar que o WebP é decodificado integralmente por uma ferramenta independente.
+- Confirmar dimensões, formato RGB e tamanho inferior a 700 KB.
+- Comparar o hash Git do arquivo local com o hash retornado pelo GitHub após a publicação; os valores devem ser idênticos.
 - Executar testes, lint e build do projeto.
 - Confirmar o deploy de produção como `READY` antes da entrega.

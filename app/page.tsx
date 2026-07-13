@@ -106,7 +106,7 @@ export default function Home() {
         <div className="hero-photo">
           <Image
             className="hero-image"
-            src="/hero-producao.png"
+            src="/hero-producao-v2.webp"
             alt="Pessoa treinando com cabos em uma academia"
             fill
             sizes="100vw"
@@ -191,7 +191,7 @@ export default function Home() {
         <div className="split-photo">
           <Image
             className="split-image"
-            src="/hero-producao.png"
+            src="/hero-producao-v2.webp"
             alt="Pessoa treinando em uma academia"
             fill
             sizes="(max-width: 960px) 100vw, 50vw"

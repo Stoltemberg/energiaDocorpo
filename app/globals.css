@@ -452,7 +452,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   padding: 90px 32px;
   background:
     linear-gradient(rgba(9,11,10,.88), rgba(9,11,10,.92)),
-    url("/hero-producao.png") center / cover no-repeat;
+    url("/hero-producao-v2.webp") center / cover no-repeat;
   border-top: 1px solid var(--line);
 }
 .final-cta h2 { font-size: clamp(4rem, 7vw, 7.5rem); }
