@@ -107,10 +107,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .hero-photo {
   position: absolute;
-  inset: 0 0 110px 42%;
+  inset: 0 0 110px 0;
   background:
     linear-gradient(90deg, var(--ink-950) 0%, rgba(9,11,10,.78) 12%, transparent 42%),
-    url("/hero-producao.png") right center / cover no-repeat;
+    url("/hero-producao.png") right center / contain no-repeat;
 }
 .hero-shade {
   position: absolute;
@@ -320,7 +320,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   min-height: 720px;
   background:
     linear-gradient(0deg, rgba(9,11,10,.25), rgba(9,11,10,.05)),
-    url("/hero-producao.png") right center / cover no-repeat;
+    url("/hero-producao.png") right center / contain no-repeat;
+  background-color: var(--ink-950);
   filter: grayscale(.15);
 }
 .split-copy { padding: clamp(70px, 8vw, 130px); align-self: center; }
@@ -479,7 +480,7 @@ footer small { grid-column: 1/-1; color: #697069; padding-bottom: 30px; }
   .site-header nav { display: none; }
   .header-cta { margin-left: auto; }
   .hero { min-height: 980px; height: auto; max-height: none; }
-  .hero-photo { inset: 380px 0 110px 28%; }
+  .hero-photo { inset: 380px 0 110px 0; }
   .hero-content { width: calc(100% - 40px); padding-top: 130px; }
   .hero h1 { font-size: clamp(4rem, 10vw, 6rem); }
   .hero-stats { width: calc(100% - 40px); }
@@ -512,7 +513,7 @@ footer small { grid-column: 1/-1; color: #697069; padding-bottom: 30px; }
     inset: 500px 0 90px 0;
     background:
       linear-gradient(180deg, var(--ink-950) 0%, transparent 22%),
-      url("/hero-producao.png") 66% center / cover no-repeat;
+      url("/hero-producao.png") right center / contain no-repeat;
   }
   .hero-content { width: calc(100% - 40px); padding-top: 125px; }
   .eyebrow { font-size: .66rem; letter-spacing: .18em; }

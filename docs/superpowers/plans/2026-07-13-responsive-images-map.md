@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- Manter `background-size: cover` nas fotografias desktop.
+- Usar `background-size: contain` nas fotografias desktop e mobile para impedir cortes.
 - Não alterar a altura atual das seções para mostrar a imagem inteira.
 - Centralizar o logotipo somente em telas de até 640 px.
 - Reutilizar `public/logo-energia-do-corpo.png`; não criar novos ativos.
@@ -27,7 +27,7 @@
 
 **Interfaces:**
 - Consumes: classes existentes `.hero-photo`, `.split-photo`, `.site-header` e `.wordmark`.
-- Produces: posições focais `right center` para desktop e centralização absoluta de `.site-header .wordmark` no breakpoint mobile.
+- Produces: fotografias completas com `contain`, hero em largura total e centralização absoluta de `.site-header .wordmark` no breakpoint mobile.
 
 - [ ] **Step 1: Escrever o teste que falha**
 

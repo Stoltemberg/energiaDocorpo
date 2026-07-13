@@ -55,16 +55,24 @@ test("inclui os ativos essenciais", async () => {
   ]);
 });
 
-test("preserva o atleta no desktop e centraliza o logo no mobile", async () => {
+test("exibe as fotografias completas e centraliza o logo no mobile", async () => {
   const css = await read("app/globals.css");
 
   assert.match(
     css,
-    /url\("\/hero-producao\.png"\) right center \/ cover no-repeat/i,
+    /\.hero-photo\s*\{[\s\S]*?inset:\s*0 0 110px 0[\s\S]*?url\("\/hero-producao\.png"\) right center \/ contain no-repeat/i,
   );
   assert.match(
     css,
-    /\.split-photo\s*\{[\s\S]*?url\("\/hero-producao\.png"\) right center \/ cover no-repeat/i,
+    /\.split-photo\s*\{[\s\S]*?url\("\/hero-producao\.png"\) right center \/ contain no-repeat[\s\S]*?background-color:\s*var\(--ink-950\)/i,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 960px\)[\s\S]*?\.hero-photo\s*\{\s*inset:\s*380px 0 110px 0;\s*\}/i,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 640px\)[\s\S]*?\.hero-photo\s*\{[\s\S]*?url\("\/hero-producao\.png"\) right center \/ contain no-repeat/i,
   );
   assert.match(
     css,

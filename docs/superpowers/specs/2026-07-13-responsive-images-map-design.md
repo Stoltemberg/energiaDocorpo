@@ -8,11 +8,11 @@ Corrigir o enquadramento das fotografias na versão desktop, centralizar o logot
 
 ### Fotografias no desktop
 
-- Manter as fotografias preenchendo integralmente suas seções com `background-size: cover`.
-- Ajustar separadamente o `background-position` da imagem principal e da imagem intermediária.
-- Preservar o atleta como ponto focal, evitando cortes no rosto, tronco e braços sempre que a proporção da seção permitir.
-- Não adicionar faixas vazias ou alterar a altura atual das seções apenas para mostrar a imagem inteira.
-- Manter os enquadramentos mobile existentes, salvo pequenos ajustes necessários para evitar regressões.
+- Exibir integralmente as fotografias com `background-size: contain` no desktop e mobile.
+- Expandir a camada fotográfica do hero por toda a largura disponível, mantendo a fotografia alinhada à direita.
+- Preservar o atleta completo, sem cortes no rosto, tronco, braços ou pernas.
+- Usar fundo preto nas áreas livres, aproveitando o fundo escuro da própria fotografia para uma transição discreta.
+- Manter as alturas atuais das seções e aceitar espaço escuro quando a proporção do contêiner for diferente da proporção da fotografia.
 
 ### Logotipo no mobile
 
@@ -46,7 +46,7 @@ Corrigir o enquadramento das fotografias na versão desktop, centralizar o logot
 
 - Executar os testes automatizados, lint e build de produção.
 - Verificar a página renderizada em uma largura desktop e uma largura mobile.
-- Confirmar que as imagens mantêm o ponto focal, o logotipo mobile está centralizado e o minimapa não apresenta mosaico.
+- Confirmar que as imagens aparecem completas, o logotipo mobile está centralizado e o minimapa não apresenta mosaico.
 - Confirmar que o marcador usa o logotipo oficial e que não surgiram erros relevantes no console.
 
 ## Fora do escopo
