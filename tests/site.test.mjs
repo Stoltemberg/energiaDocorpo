@@ -1,8 +1,43 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { access, readFile } from "node:fs/promises";
+import { inflateSync } from "node:zlib";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
+
+async function inspectRgbPng(path) {
+  const png = await readFile(new URL(path, import.meta.url));
+  assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+
+  let offset = 8;
+  let width = 0;
+  let height = 0;
+  const idat = [];
+  while (offset + 12 <= png.length) {
+    const length = png.readUInt32BE(offset);
+    const end = offset + 12 + length;
+    assert.ok(end <= png.length, "chunk PNG truncado");
+    const type = png.toString("ascii", offset + 4, offset + 8);
+    const data = png.subarray(offset + 8, offset + 8 + length);
+    if (type === "IHDR") {
+      width = data.readUInt32BE(0);
+      height = data.readUInt32BE(4);
+      assert.equal(data[8], 8);
+      assert.equal(data[9], 2);
+    }
+    if (type === "IDAT") idat.push(data);
+    offset = end;
+    if (type === "IEND") break;
+  }
+
+  const pixels = inflateSync(Buffer.concat(idat));
+  const rowLength = 1 + width * 3;
+  assert.equal(pixels.length, rowLength * height);
+  for (let row = 0; row < height; row += 1) {
+    assert.ok(pixels[row * rowLength] <= 4, `filtro PNG inválido na linha ${row}`);
+  }
+  return { width, height };
+}
 
 test("preserva a jornada de conversão e os destinos", async () => {
   const page = await read("app/page.tsx");
@@ -53,6 +88,12 @@ test("inclui os ativos essenciais", async () => {
     access(new URL("../public/fonts/anton-latin.woff2", import.meta.url)),
     access(new URL("../public/fonts/geist-latin.woff2", import.meta.url)),
   ]);
+});
+
+test("mantém a fotografia principal como PNG íntegro e completo", async () => {
+  const image = await inspectRgbPng("../public/hero-producao.png");
+  assert.ok(image.width > image.height, "a fotografia deve ser horizontal");
+  assert.ok(image.width >= 1200, "a fotografia deve ter resolução suficiente");
 });
 
 test("exibe as fotografias completas e centraliza o logo no mobile", async () => {
